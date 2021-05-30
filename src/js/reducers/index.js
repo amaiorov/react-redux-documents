@@ -14,10 +14,15 @@ function rootReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case ADD_ARTICLE:
+      if (!action.payload.title) {
+        throw new Error('no title provided.');
+      }
       const articleExists = state.articles.find(item => item.id === action.payload.id);
       if (articleExists) {
         throw new Error('article already exists.');
       }
+
+      action.payload.id = action.payload.id || state.articles[state.articles.length - 1].id + 1;
 
       newState = {
         ...state,

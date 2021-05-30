@@ -16,13 +16,13 @@ const ConnectedList = (props) => {
       <h2>Articles</h2>
       <ul>
         { props.articles.map(el => (
-          <li key={ el.id }>{ el.title }</li>
+          <li key={ el.id }>[{ el.id }] { el.title }</li>
         )) }
       </ul>
       <h2>Trash</h2>
       <ul>
         { props.removedArticles.map(el => (
-          <li key={ el.id }>{ el.title }</li>
+          <li key={ el.id }>[{ el.id }] { el.title }</li>
         )) }
       </ul>
     </>
