@@ -3,8 +3,7 @@ import List from 'js/components/List';
 
 const App = () => (
   <div>
-    <h2>Articles</h2>
-    <List />
+    <List title="Articles" />
   </div>
 );
 
