@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { removeArticle } from 'js/actions/index';
 
 const mapStateToProps = state => {
   return {
@@ -8,15 +9,29 @@ const mapStateToProps = state => {
   };
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    removeArticle: article => dispatch(removeArticle(article))
+  };
+};
+
 const ConnectedList = (props) => {
-  console.log(props);
+
+  const handleRemove = (evt) => {
+    props.removeArticle({
+      id: parseInt(evt.target.dataset.id)
+    });
+  };
   
   return (
     <>
       <h2>Articles</h2>
       <ul>
         { props.articles.map(el => (
-          <li key={ el.id }>[{ el.id }] { el.title }</li>
+          <li key={ el.id }>
+            [{ el.id }] { el.title }
+            <button data-id={ el.id } onClick={ handleRemove }>Remove</button>
+          </li>
         )) }
       </ul>
       <h2>Trash</h2>
@@ -29,6 +44,6 @@ const ConnectedList = (props) => {
   );
 }
 
-const List = connect(mapStateToProps)(ConnectedList);
+const List = connect(mapStateToProps, mapDispatchToProps)(ConnectedList);
 
 export default List;

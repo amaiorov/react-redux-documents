@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addArticle } from 'js/actions/index';
 
@@ -10,10 +10,6 @@ function mapDispatchToProps(dispatch) {
 
 const ConnectedForm = (props) => {
   const [title, setTitle] = useState('');
-
-  useEffect(() => {
-
-  }, []);
 
   const handleChange = (evt) => {
     setTitle(evt.target.value);

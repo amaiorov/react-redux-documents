@@ -30,6 +30,7 @@ function rootReducer(state = initialState, action) {
       };
       break;
     case REMOVE_ARTICLE:
+
       const removedArticle = state.articles.find(item => item.id === action.payload.id );
       if (!removedArticle) {
         throw new Error('article not found.');
