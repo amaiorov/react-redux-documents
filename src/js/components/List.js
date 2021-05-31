@@ -33,6 +33,7 @@ const ConnectedList = (props) => {
   return (
     <>
       <h2>Articles</h2>
+      <i>{ props.articles.length || 'no '} item{ props.articles.length !== 1 && 's' }</i>
       <ul>
         { props.articles.map(el => (
           <li key={ el.id }>
@@ -42,6 +43,7 @@ const ConnectedList = (props) => {
         )) }
       </ul>
       <h2>Trash</h2>
+      <i>{ props.removedArticles.length || 'no ' } item{ props.removedArticles.length !== 1 && 's' }</i>
       <ul>
         { props.removedArticles.map(el => (
           <li key={ el.id }>
