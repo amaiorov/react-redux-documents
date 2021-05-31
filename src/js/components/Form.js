@@ -17,8 +17,12 @@ const ConnectedForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.addArticle({ title });
-    setTitle('');
+    if (!title) {
+      alert('Title is required')
+    } else {
+      props.addArticle({ title });
+      setTitle('');
+    }
   }
 
   return (

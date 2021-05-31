@@ -1,5 +1,4 @@
-import { removeArticle } from 'js/actions';
-import { ADD_ARTICLE, REMOVE_ARTICLE } from 'js/constants/action-types';
+import { ADD_ARTICLE, REMOVE_ARTICLE, RESTORE_ARTICLE } from 'js/constants/action-types';
 
 const initialState = {
   articles: [
@@ -22,7 +21,7 @@ function rootReducer(state = initialState, action) {
         throw new Error('article already exists.');
       }
 
-      action.payload.id = action.payload.id || state.articles[state.articles.length - 1].id + 1;
+      action.payload.id = action.payload.id || [...state.articles, ...state.removedArticles].sort((a, b) => a.id - b.id)[state.articles.length + state.removedArticles.length - 1].id + 1;
 
       newState = {
         ...state,
@@ -30,7 +29,9 @@ function rootReducer(state = initialState, action) {
       };
       break;
     case REMOVE_ARTICLE:
-
+      if (!action.payload.id) {
+        throw new Error('no id provided.');
+      }
       const removedArticle = state.articles.find(item => item.id === action.payload.id );
       if (!removedArticle) {
         throw new Error('article not found.');
@@ -40,6 +41,24 @@ function rootReducer(state = initialState, action) {
         ...state,
         articles: state.articles.filter(item => item.id !== action.payload.id),
         removedArticles: state.removedArticles.concat(removedArticle)
+      };
+      break;
+    case RESTORE_ARTICLE:
+      if (!action.payload.id) {
+        throw new Error('no id provided.');
+      }
+      // const articleExists = state.articles.find(item => item.id === action.payload.id);
+      // if (articleExists) {
+      //   throw new Error('article already exists.');
+      // }
+      const restoredArticle = state.removedArticles.find(item => item.id === action.payload.id);
+
+      console.log([...state.articles, ...state.removedArticles].map(item => item.id));
+
+      newState = {
+        ...state,
+        articles: state.articles.concat(restoredArticle),
+        removedArticles: state.removedArticles.filter(item => item.id !== action.payload.id)
       };
       break;
     default:
