@@ -4,17 +4,17 @@ import { render as rtlRender } from '@testing-library/react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 // Import your own reducer;
-import reducer from 'js/reducersa/';
+import reducer from 'js/reducers/';
 
-function render(
+const render = (
   ui,
   {
     initialState,
     store = createStore(reducer, initialState),
     ...renderOptions
   } = {}
-) {
-  function Wrapper({ children }) {
+) => {
+  const Wrapper = ({ children }) => {
     return <Provider store={ store }>{ children }</Provider>;
   }
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });

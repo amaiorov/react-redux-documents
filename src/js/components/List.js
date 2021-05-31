@@ -9,7 +9,7 @@ const mapStateToProps = state => {
   };
 };
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     removeArticle: article => dispatch(removeArticle(article)),
     restoreArticle: article => dispatch(restoreArticle(article))

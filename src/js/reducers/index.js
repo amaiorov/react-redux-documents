@@ -9,7 +9,7 @@ const initialState = {
   removedArticles: []
 };
 
-function rootReducer(state = initialState, action) {
+const rootReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ADD_ARTICLE:
