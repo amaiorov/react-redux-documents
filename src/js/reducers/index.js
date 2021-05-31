@@ -13,14 +13,19 @@ function rootReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case ADD_ARTICLE:
+      // no title in payload
       if (!action.payload.title) {
         throw new Error('no title provided.');
       }
+      
+      // article with this id already exists
       const articleExists = state.articles.find(item => item.id === action.payload.id);
       if (articleExists) {
         throw new Error('article already exists.');
       }
 
+      // use id from payload OR
+      // if does note exists, merge articles and removed articles sort by id asc, take the biggest id + 1; this will be new id
       action.payload.id = action.payload.id || [...state.articles, ...state.removedArticles].sort((a, b) => a.id - b.id)[state.articles.length + state.removedArticles.length - 1].id + 1;
 
       newState = {
@@ -29,9 +34,12 @@ function rootReducer(state = initialState, action) {
       };
       break;
     case REMOVE_ARTICLE:
+      // no id in payload
       if (!action.payload.id) {
         throw new Error('no id provided.');
       }
+
+      // article does not exist in removed articles
       const removedArticle = state.articles.find(item => item.id === action.payload.id );
       if (!removedArticle) {
         throw new Error('article not found.');
@@ -44,16 +52,13 @@ function rootReducer(state = initialState, action) {
       };
       break;
     case RESTORE_ARTICLE:
+      // no id in payload
       if (!action.payload.id) {
         throw new Error('no id provided.');
       }
-      // const articleExists = state.articles.find(item => item.id === action.payload.id);
-      // if (articleExists) {
-      //   throw new Error('article already exists.');
-      // }
-      const restoredArticle = state.removedArticles.find(item => item.id === action.payload.id);
 
-      console.log([...state.articles, ...state.removedArticles].map(item => item.id));
+      // article to move restore
+      const restoredArticle = state.removedArticles.find(item => item.id === action.payload.id);
 
       newState = {
         ...state,
