@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, REMOVE_ARTICLE, RESTORE_ARTICLE } from 'js/constants/action-types';
+import { ADD_ARTICLE, REMOVE_ARTICLE, RESTORE_ARTICLE, EMPTY_TITLE } from 'js/constants/action-types';
 
 const initialState = {
   articles: [
@@ -66,6 +66,8 @@ function rootReducer(state = initialState, action) {
         removedArticles: state.removedArticles.filter(item => item.id !== action.payload.id)
       };
       break;
+    case EMPTY_TITLE:
+      alert('Title cannot be empty');
     default:
       newState = state;
   }

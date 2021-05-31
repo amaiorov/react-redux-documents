@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addArticle } from 'js/actions/index';
+import { addArticle } from 'js/actions/';
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -17,12 +17,8 @@ const ConnectedForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!title) {
-      alert('Title is required')
-    } else {
-      props.addArticle({ title });
-      setTitle('');
-    }
+    props.addArticle({ title });
+    setTitle('');
   }
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeArticle, restoreArticle } from 'js/actions/index';
+import { removeArticle, restoreArticle } from 'js/actions';
 
 const mapStateToProps = state => {
   return {

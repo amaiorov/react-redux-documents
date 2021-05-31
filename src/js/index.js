@@ -1,5 +1,5 @@
-import store from 'js/store/index';
-import { addArticle, removeArticle } from 'js/actions/index';
+import store from 'js/store/';
+import { addArticle, removeArticle } from 'js/actions/';
 
 window.store = store;
 window.addArticle = addArticle;
