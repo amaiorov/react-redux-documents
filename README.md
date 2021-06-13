@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# About
+This project was built to refresh my knowledge of Redux. It is a modified to-do app, with the ability to add, delete, modify articles.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
