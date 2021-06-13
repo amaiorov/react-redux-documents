@@ -13,14 +13,14 @@ export const restoreArticle = (payload) => {
 };
 
 export const getData = () => {
-  return fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => {
-      response.json()
-    })
-    .then(json => {
-      return {
-        type: DATA_LOADED,
-        payload: json
-      }
-    });
+  return (dispatch) => {
+    return fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(json => { 
+        dispatch({
+          type: DATA_LOADED,
+          payload: json
+        });
+      });
+    };
 };

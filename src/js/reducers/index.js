@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, REMOVE_ARTICLE, RESTORE_ARTICLE, EMPTY_TITLE } from 'js/constants/action-types';
+import { ADD_ARTICLE, REMOVE_ARTICLE, RESTORE_ARTICLE, EMPTY_TITLE, DATA_LOADED } from 'js/constants/action-types';
 
 const initialState = {
   articles: [
@@ -6,7 +6,8 @@ const initialState = {
     { title: 'test2', id: 2 },
     { title: 'test3', id: 3 }
   ],
-  removedArticles: []
+  removedArticles: [],
+  remoteArticles: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -64,6 +65,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         articles: state.articles.concat(restoredArticle),
         removedArticles: state.removedArticles.filter(item => item.id !== action.payload.id)
+      };
+      break;
+    case DATA_LOADED:
+      newState = {
+        ...state,
+        remoteArticles: state.remoteArticles.concat(action.payload)
       };
       break;
     case EMPTY_TITLE:
